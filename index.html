@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADU Feasibility Calculator</title>
+</head>
+<body>
+    <h1>ADU Feasibilty Calculator</h1>
+    <form id="aduForm">
+        <fieldset>
+            <label for="lotWidth">
+                Lot Width (feet):
+                <input type="number" id="lotWidth" name="lotWidth" required>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <label for="lotDepth">
+                Lot Depth (feet):
+                <input type="number" id="lotDepth" name="lotDepth" required>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <label for="houseSize">
+                Existing House Size (square feet):
+                <input type="number" id="houseSize" name="houseSize" required>
+            </label>
+        </fieldset>
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div id="result"></div>
+</body>
+</html>
