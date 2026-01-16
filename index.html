@@ -33,5 +33,31 @@
     </form>
 
     <div id="result"></div>
+    <script>
+        const form = document.getElementById("aduForm");
+        const resultDiv = document.getElementById("result");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const lotWidth = parseFloat(document.getElementById("lotWidth").value);
+            const lotDepth = parseFloat(document.getElementById("lotDepth").value);
+            const houseSize = parseFloat(document.getElementById("houseSize").value);
+
+            const totalLotArea = lotWidth * lotDepth;
+
+            const availableArea = totalLotArea - houseSize;
+
+            const aduSize = Math.round(availableArea * 0.3);
+
+            resultDiv.innerHTML = `
+                <h2>Results:</h2>
+                <p>Total lot size: ${totalLotArea.toLocaleString()} sq ft</p>
+                <p>Existing house: ${houseSize.toLocaleString()} sq ft</p>
+                <p>Available area: ${availableArea.toLocaleString()} sq ft</p>
+                <p><strong>Estimated ADU size: ${aduSize.toLocaleString()} sq ft</strong></p>
+                `;
+        });
+    </script>
 </body>
 </html>
