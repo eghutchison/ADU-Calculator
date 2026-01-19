@@ -35,7 +35,9 @@
 
     <div id="result"></div>
     <script>
-       form.addEventListener("submit", function(event) {
+        const form = document.getElementById("aduForm");
+        const resultDiv = document.getElementById("result");
+        form.addEventListener("submit", function(event) {
             event.preventDefault();
     
         // Get input values
