@@ -27,12 +27,17 @@ I was researching ADUs for my own property and got tired of manually calculating
 - External CSS
 - Semantic HTML
 
-## Try It
+## Try It Live
+
+**[Use the ADU Calculator Here](https://eghutchison.github.io/ADU-Calculator/)**
+
+No installation needed - just click and use.
+
+### Or Run Locally
 
 1. Clone this repository
 2. Open `index.html` in your browser
-3. Enter your lot dimensions
-4. Click Calculate
+3. Works offline
 
 ## Limitations
 
