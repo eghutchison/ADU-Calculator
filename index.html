@@ -35,30 +35,69 @@
 
     <div id="result"></div>
     <script>
-        const form = document.getElementById("aduForm");
-        const resultDiv = document.getElementById("result");
-
-        form.addEventListener("submit", function(event) {
+       form.addEventListener("submit", function(event) {
             event.preventDefault();
-
-            const lotWidth = parseFloat(document.getElementById("lotWidth").value);
-            const lotDepth = parseFloat(document.getElementById("lotDepth").value);
-            const houseSize = parseFloat(document.getElementById("houseSize").value);
-
-            const totalLotArea = lotWidth * lotDepth;
-
-            const availableArea = totalLotArea - houseSize;
-
-            const aduSize = Math.round(availableArea * 0.3);
-
+    
+        // Get input values
+        const lotWidth = document.getElementById("lotWidth").value;
+        const lotDepth = document.getElementById("lotDepth").value;
+        const houseSize = document.getElementById("houseSize").value;
+    
+        // Validate inputs - check if any are empty
+        if (!lotWidth || !lotDepth || !houseSize) {
+            resultDiv.innerHTML = `
+                <p style="color: #e74c3c; font-weight: 600;">
+                    ⚠️ Please fill in all fields before calculating.
+                </p>
+            `;
+            return; // Stop here, don't calculate
+        }
+    
+        // Convert to numbers
+        const widthNum = parseFloat(lotWidth);
+        const depthNum = parseFloat(lotDepth);
+        const houseSizeNum = parseFloat(houseSize);
+    
+        // Validate that inputs are positive numbers
+        if (widthNum <= 0 || depthNum <= 0 || houseSizeNum < 0) {
+            resultDiv.innerHTML = `
+                <p style="color: #e74c3c; font-weight: 600;">
+                    ⚠️ Please enter valid positive numbers.
+                </p>
+            `;
+            return;
+        }
+    
+        // Calculate total lot area
+        const totalLotArea = widthNum * depthNum;
+    
+        // Calculate available area (lot minus house)
+        const availableArea = totalLotArea - houseSizeNum;
+    
+        // Check if house is bigger than lot
+        if (availableArea <= 0) {
             resultDiv.innerHTML = `
                 <h2>Results:</h2>
-                <p>Total lot size: ${totalLotArea.toLocaleString()} sq ft</p>
-                <p>Existing house: ${houseSize.toLocaleString()} sq ft</p>
-                <p>Available area: ${availableArea.toLocaleString()} sq ft</p>
-                <p><strong>Estimated ADU size: ${aduSize.toLocaleString()} sq ft</strong></p>
-                `;
-        });
+                <p style="color: #e74c3c; font-weight: 600;">
+                    ⚠️ Your house size is equal to or larger than your lot size. 
+                    Please check your measurements.
+                </p>
+            `;
+            return;
+        }
+    
+        // Estimate ADU size (30% of available area as rough estimate)
+        const aduSize = Math.round(availableArea * 0.3);
+    
+        // Display result
+        resultDiv.innerHTML = `
+            <h2>Results:</h2>
+            <p>Total lot size: ${totalLotArea.toLocaleString()} sq ft</p>
+            <p>Existing house: ${houseSizeNum.toLocaleString()} sq ft</p>
+            <p>Available area: ${availableArea.toLocaleString()} sq ft</p>
+            <p><strong>Estimated ADU size: ${aduSize.toLocaleString()} sq ft</strong></p>
+        `;
+    });
     </script>
 </body>
 </html>
